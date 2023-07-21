@@ -2,8 +2,11 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
 name: Python application
-
-on: push
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  
+# on: push
 
 permissions:
   contents: write
@@ -24,7 +27,7 @@ jobs:
       
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
-          commit_message: Apply php-cs-fixer changes
+          commit_message: Apply Auto-Change to Blank
     - name: "Run if changes have been detected"
       if: steps.auto-commit-action.outputs.changes_detected == 'true'
       run: echo "Changes!"
